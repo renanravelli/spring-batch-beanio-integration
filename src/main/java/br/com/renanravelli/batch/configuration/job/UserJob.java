@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author renanravelli
- * @since 02/03/2018
+ * @since 02/03/2019
  */
 @Configuration
 @EnableBatchProcessing

@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @author renanravelli
- * @since 02/03/2018
+ * @since 02/03/2019
  * Classe responsavel pelo mapeamento do header no arquivo.
  */
 @Record
