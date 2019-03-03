@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author renanravelli
+ * @since 02/03/2018
+ * Classe responsavel por montar o arquivo, preenchendo o header e body com
+ * base nos dados recuperados do banco de dados.
+ */
 public class UserRegistry implements Registry {
 
     private List<Registry> users = new ArrayList<>();
@@ -29,6 +35,8 @@ public class UserRegistry implements Registry {
 
         public UserRegistryBuilder body(ItemReader<User> body) throws Exception {
             User user = null;
+
+            //ler ate que seja null.
             while ((user = body.read()) != null) {
                 registries.add(new UserBody
                         .UserBodyBuilder()
@@ -39,6 +47,7 @@ public class UserRegistry implements Registry {
                 );
             }
 
+            // se o header nao estiver preenchido.
             if (!(registries.get(0) instanceof UserHeader)) {
                 registries.add(0, new UserHeader
                         .UserHeaderBuilder()

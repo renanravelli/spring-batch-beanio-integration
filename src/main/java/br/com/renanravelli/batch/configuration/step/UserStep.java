@@ -18,6 +18,10 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Iterator;
 
+/**
+ * @author renanravelli
+ * @since 02/03/2018
+ */
 @Configuration
 public class UserStep {
 
@@ -28,12 +32,20 @@ public class UserStep {
     @Value("${file.directory.out}")
     private String path;
 
+
+    /**
+     * Item responsavel por realizar a leitura dos dados na base de dados.
+     */
     @Bean("reader")
     public ItemReader<User> reader() {
         Iterator<User> users = this.userService.findByAll().iterator();
         return () -> users.hasNext() ? users.next() : null;
     }
 
+    /**
+     * Item responsavel por realizar a escrita no arquivo utilizando o
+     * mapeamento do beanio.
+     */
     @Bean("writer")
     public ItemWriter writer() throws Exception {
 
@@ -50,6 +62,9 @@ public class UserStep {
                 UserHeader.class, UserBody.class);
     }
 
+    /**
+     * Step responsavel por realizar a execucao dos itens reader e writer.
+     */
     @Bean("stepReaderUsers")
     public Step stepReaderUsers(@Qualifier("reader") ItemReader reader, @Qualifier("writer") ItemWriter writer) {
         return this.stepBuilderFactory.get("STEP_READER_USERS_IN_DATABASE")

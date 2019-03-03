@@ -8,6 +8,11 @@ import org.beanio.builder.Align;
 
 import java.util.Date;
 
+/**
+ * @author renanravelli
+ * @since 02/03/2018
+ * Classe responsavel pelo mapeamento do header no arquivo.
+ */
 @Record
 @Fields({@Field(length = 2, name = "identificador de registro", rid = true, literal = "HD")})
 public class UserHeader implements Registry {

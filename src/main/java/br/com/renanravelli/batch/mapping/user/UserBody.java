@@ -7,6 +7,11 @@ import org.beanio.annotation.Record;
 
 import java.util.Date;
 
+/**
+ * @author renanravelli
+ * @since 02/03/2018
+ * Classe responsavel pelo mapeamento do body no arquivo.
+ */
 @Record
 @Fields({@Field(length = 2, name = "identificador de registro", rid = true, literal = "RG")})
 public class UserBody implements Registry {

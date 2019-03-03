@@ -7,12 +7,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author renanravelli
+ * @since 02/03/2018
+ */
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Reponsavel por buscar todos os usuarios da base de dados.
+     * @return Todos os usuarios.
+     */
     public List<User> findByAll() {
         return this.userRepository.findAll();
     }

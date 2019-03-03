@@ -3,6 +3,11 @@ package br.com.renanravelli.batch.model;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * @author renanravelli
+ * @since 02/03/2018
+ * Classe responsavel pelo mapeamento da entidade do banco de dados.
+ */
 @Entity
 @Table(name = "User")
 public class User {

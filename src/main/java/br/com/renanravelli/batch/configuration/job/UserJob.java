@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author renanravelli
+ * @since 02/03/2018
+ */
 @Configuration
 @EnableBatchProcessing
 public class UserJob {
@@ -17,6 +21,9 @@ public class UserJob {
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
 
+    /**
+     * Job responsavel por realizar a chamada dos steps.
+     */
     @Bean
     public Job sampleJob(@Qualifier("stepReaderUsers") Step stepReaderUsers) {
         return this.jobBuilderFactory.get("sampleJob")
