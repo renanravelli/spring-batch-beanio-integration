@@ -19,7 +19,7 @@ public class UserHeader implements Registry {
 
     @Field(length = 8, name = "data geracao do arquivo", format = "ddMMyyyy")
     private Date dateGenerate;
-    @Field(length = 9, align = Align.RIGHT, type = Integer.class, padding = 0, defaultValue = "0")
+    @Field(length = 6, align = Align.RIGHT, padding = '0', type = Integer.class)
     private Integer registryAmount;
 
     private UserHeader(Date dateGenerate, Integer registryAmount) {

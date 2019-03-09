@@ -22,6 +22,7 @@ public class ItemUtils {
 
     /**
      * Realizada a escrita no arquivo.
+     *
      * @throws Exception
      */
     public static org.springframework.batch.item.ItemWriter writer(String stream,
