@@ -19,9 +19,14 @@ public class UserService {
 
     /**
      * Reponsavel por buscar todos os usuarios da base de dados.
+     *
      * @return Todos os usuarios.
      */
     public List<User> findByAll() {
         return this.userRepository.findAll();
+    }
+
+    public void save(User user) {
+        this.userRepository.save(user);
     }
 }

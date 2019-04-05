@@ -1,5 +1,7 @@
 package br.com.renanravelli.batch.configuration.step;
 
+import br.com.renanravelli.batch.configuration.item.UserItemReader;
+import br.com.renanravelli.batch.configuration.item.UserItemWriter;
 import br.com.renanravelli.batch.mapping.user.UserBody;
 import br.com.renanravelli.batch.mapping.user.UserHeader;
 import br.com.renanravelli.batch.mapping.user.UserRegistry;
@@ -17,6 +19,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author renanravelli
@@ -38,8 +41,7 @@ public class UserStep {
      */
     @Bean("reader")
     public ItemReader<User> reader() {
-        Iterator<User> users = this.userService.findByAll().iterator();
-        return () -> users.hasNext() ? users.next() : null;
+        return new UserItemReader();
     }
 
     /**
@@ -48,18 +50,7 @@ public class UserStep {
      */
     @Bean("writer")
     public ItemWriter writer() throws Exception {
-
-        UserRegistry userRegistry = new UserRegistry
-                .UserRegistryBuilder()
-                .body(reader())
-                .build();
-
-        return ItemUtils.writer(
-                "userStream",
-                path,
-                "users.txt",
-                userRegistry.getUsers(),
-                UserHeader.class, UserBody.class);
+       return new UserItemWriter();
     }
 
     /**

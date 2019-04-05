@@ -25,11 +25,11 @@ public class ItemUtils {
      *
      * @throws Exception
      */
-    public static org.springframework.batch.item.ItemWriter writer(String stream,
-                                                                   String path,
-                                                                   String fileName,
-                                                                   List<Registry> registries,
-                                                                   Class... classes) throws Exception {
+    public static org.springframework.batch.item.ItemWriter<Registry> writer(String stream,
+                                                                             String path,
+                                                                             String fileName,
+                                                                             List<Registry> registries,
+                                                                             Class... classes) throws Exception {
         StreamBuilder streamBuilder = new StreamBuilder(stream);
         streamBuilder.format("fixedlength")
                 .parser(new FixedLengthParserBuilder());
@@ -39,7 +39,7 @@ public class ItemUtils {
         StreamFactory streamFactory = StreamFactory.newInstance();
         streamFactory.define(streamBuilder);
 
-        BeanIOFlatFileItemWriter writerBuilder = new BeanIOFlatFileItemWriter();
+        BeanIOFlatFileItemWriter<Registry> writerBuilder = new BeanIOFlatFileItemWriter<Registry>();
         writerBuilder.setStreamName(stream);
         writerBuilder.setTransactional(false);
         writerBuilder.setStreamFactory(streamFactory);

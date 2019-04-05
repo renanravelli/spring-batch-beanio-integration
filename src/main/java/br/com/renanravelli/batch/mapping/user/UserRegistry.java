@@ -33,22 +33,18 @@ public class UserRegistry implements Registry {
             return this;
         }
 
-        public UserRegistryBuilder body(ItemReader<User> body) throws Exception {
-            User user = null;
+        public UserRegistryBuilder body(User user) throws Exception {
 
-            //ler ate que seja null.
-            while ((user = body.read()) != null) {
-                registries.add(new UserBody
-                        .UserBodyBuilder()
-                        .name(user.getName())
-                        .lastname(user.getLastname())
-                        .birthday(user.getBirthday())
-                        .build()
-                );
-            }
+            registries.add(new UserBody
+                    .UserBodyBuilder()
+                    .name(user.getName())
+                    .lastname(user.getLastname())
+                    .birthday(user.getBirthday())
+                    .build()
+            );
 
             // se o header nao estiver preenchido.
-            if (!(registries.get(0) instanceof UserHeader)) {
+            if (registries.get(0) == null && !(registries.get(0) instanceof UserHeader)) {
                 registries.add(0, new UserHeader
                         .UserHeaderBuilder()
                         .dateGenerate(new Date())
