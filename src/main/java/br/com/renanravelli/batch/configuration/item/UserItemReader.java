@@ -27,12 +27,13 @@ public class UserItemReader extends StepExecutionListenerSupport implements Item
 
     @Override
     public User read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
-        User user = null;
-        while (amountUsers > 0) {
-            user = users.get(amountUsers - 1);
-            amountUsers--;
-            return user;
+        if (amountUsers > 0) {
+            do {
+                User user = users.get(amountUsers - 1);
+                amountUsers--;
+                return user;
+            } while (amountUsers > 0);
         }
-        return user;
+        return null;
     }
 }

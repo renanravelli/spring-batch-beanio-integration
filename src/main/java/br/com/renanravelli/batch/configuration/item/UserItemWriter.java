@@ -8,6 +8,7 @@ import br.com.renanravelli.batch.util.ItemUtils;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.Date;
 import java.util.List;
 
 public class UserItemWriter implements ItemWriter<User> {
@@ -21,6 +22,7 @@ public class UserItemWriter implements ItemWriter<User> {
         UserRegistry.UserRegistryBuilder userRegistry = new UserRegistry
                 .UserRegistryBuilder();
 
+
         list.forEach(o -> {
             try {
                 userRegistry.body(o);
@@ -30,6 +32,14 @@ public class UserItemWriter implements ItemWriter<User> {
         });
 
         UserRegistry userBuild = userRegistry.build();
+        userRegistry.header(new UserHeader
+                .UserHeaderBuilder()
+                .dateGenerate(new Date())
+                .registryAmount(
+                        userBuild.getUsers().size()
+                )
+                .build());
+
 
         ItemUtils.writer(
                 "userStream",

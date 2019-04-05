@@ -13,7 +13,7 @@ import java.util.Date;
  * Classe responsavel pelo mapeamento do body no arquivo.
  */
 @Record
-@Fields({@Field(length = 2, name = "identificador de registro", rid = true, literal = "RG")})
+@Fields({@Field(length = 8, name = "identificador de registro", rid = true, literal = "REGISTER")})
 public class UserBody implements Registry {
 
     @Field(length = 20, name = "nome do usuario", required = true)

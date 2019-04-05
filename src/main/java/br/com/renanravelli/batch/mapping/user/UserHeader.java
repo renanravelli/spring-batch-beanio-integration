@@ -14,7 +14,7 @@ import java.util.Date;
  * Classe responsavel pelo mapeamento do header no arquivo.
  */
 @Record
-@Fields({@Field(length = 2, name = "identificador de registro", rid = true, literal = "HD")})
+@Fields({@Field(length = 6, name = "identificador de registro", rid = true, literal = "HEADER")})
 public class UserHeader implements Registry {
 
     @Field(length = 8, name = "data geracao do arquivo", format = "ddMMyyyy")
