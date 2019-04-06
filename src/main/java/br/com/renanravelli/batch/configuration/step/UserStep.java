@@ -1,6 +1,5 @@
 package br.com.renanravelli.batch.configuration.step;
 
-import br.com.renanravelli.batch.service.UserService;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemReader;
@@ -28,9 +27,9 @@ public class UserStep {
      * Step responsavel por realizar a execucao dos itens reader e writer.
      */
     @Bean("stepReaderUsers")
-    public Step stepReaderUsers(@Qualifier("userItemReader") ItemReader reader, @Qualifier("userItemWriter") ItemWriter writer) {
+    public Step stepReaderUsers(@Qualifier("reader") ItemReader reader, @Qualifier("userItemWriter") ItemWriter writer) {
         return this.stepBuilderFactory.get("STEP_READER_USERS_IN_DATABASE")
-                .chunk(100)
+                .chunk(1000)
                 .reader(reader)
                 .writer(writer)
                 .build();
