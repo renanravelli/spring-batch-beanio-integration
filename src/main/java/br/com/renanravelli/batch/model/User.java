@@ -9,7 +9,7 @@ import java.util.Date;
  * Classe responsavel pelo mapeamento da entidade do banco de dados.
  */
 @Entity
-@Table(name = "User")
+@Table(name = "USER")
 public class User {
 
     @Id

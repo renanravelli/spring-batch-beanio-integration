@@ -1,13 +1,6 @@
 package br.com.renanravelli.batch.configuration.step;
 
-import br.com.renanravelli.batch.configuration.item.UserItemReader;
-import br.com.renanravelli.batch.configuration.item.UserItemWriter;
-import br.com.renanravelli.batch.mapping.user.UserBody;
-import br.com.renanravelli.batch.mapping.user.UserHeader;
-import br.com.renanravelli.batch.mapping.user.UserRegistry;
-import br.com.renanravelli.batch.model.User;
 import br.com.renanravelli.batch.service.UserService;
-import br.com.renanravelli.batch.util.ItemUtils;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemReader;
@@ -18,9 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * @author renanravelli
  * @since 02/03/2019
@@ -30,34 +20,15 @@ public class UserStep {
 
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
-    @Autowired
-    private UserService userService;
     @Value("${file.directory.out}")
     private String path;
 
 
     /**
-     * Item responsavel por realizar a leitura dos dados na base de dados.
-     */
-    @Bean("reader")
-    public ItemReader<User> reader() {
-        return new UserItemReader();
-    }
-
-    /**
-     * Item responsavel por realizar a escrita no arquivo utilizando o
-     * mapeamento do beanio.
-     */
-    @Bean("writer")
-    public ItemWriter writer() throws Exception {
-       return new UserItemWriter();
-    }
-
-    /**
      * Step responsavel por realizar a execucao dos itens reader e writer.
      */
     @Bean("stepReaderUsers")
-    public Step stepReaderUsers(@Qualifier("reader") ItemReader reader, @Qualifier("writer") ItemWriter writer) {
+    public Step stepReaderUsers(@Qualifier("userItemReader") ItemReader reader, @Qualifier("userItemWriter") ItemWriter writer) {
         return this.stepBuilderFactory.get("STEP_READER_USERS_IN_DATABASE")
                 .chunk(100)
                 .reader(reader)

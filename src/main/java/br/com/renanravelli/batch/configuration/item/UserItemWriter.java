@@ -7,10 +7,12 @@ import br.com.renanravelli.batch.model.User;
 import br.com.renanravelli.batch.util.ItemUtils;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
+@Component("userItemWriter")
 public class UserItemWriter implements ItemWriter<User> {
 
     @Value("${file.directory.out}")

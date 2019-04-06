@@ -1,6 +1,5 @@
 package br.com.renanravelli.batch.configuration.job;
 
-import br.com.renanravelli.batch.configuration.listeners.UserJobListener;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -21,8 +20,6 @@ public class UserJob {
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
-    @Autowired
-    private UserJobListener userJobListener;
 
     /**
      * Job responsavel por realizar a chamada dos steps.
@@ -32,7 +29,6 @@ public class UserJob {
         return this.jobBuilderFactory.get("sampleJob")
                 .incrementer(new RunIdIncrementer())
                 .start(stepReaderUsers)
-                .listener(userJobListener)
                 .build();
     }
 

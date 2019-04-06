@@ -9,9 +9,11 @@ import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component("userItemReader")
 public class UserItemReader extends StepExecutionListenerSupport implements ItemReader<User> {
     @Autowired
     private UserService userService;
