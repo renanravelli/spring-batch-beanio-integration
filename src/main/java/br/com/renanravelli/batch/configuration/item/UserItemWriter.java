@@ -24,9 +24,8 @@ public class UserItemWriter implements ItemWriter<User> {
         userRegistry = new UserRegistry.UserRegistryBuilder()
                 .build();
 
-        createBody((List<User>) list);
         createHeader();
-
+        createBody((List<User>) list);
 
         ItemUtils.writer(
                 "userStream",
