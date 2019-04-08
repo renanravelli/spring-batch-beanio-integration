@@ -2,6 +2,7 @@ package br.com.renanravelli.batch.configuration.step;
 
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 02/03/2019
  */
 @Configuration
-public class UserStep {
+public class UserStep extends StepExecutionListenerSupport {
 
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
@@ -34,4 +35,5 @@ public class UserStep {
                 .writer(writer)
                 .build();
     }
+
 }

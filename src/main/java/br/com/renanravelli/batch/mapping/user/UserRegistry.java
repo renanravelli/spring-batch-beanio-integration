@@ -2,6 +2,7 @@ package br.com.renanravelli.batch.mapping.user;
 
 import br.com.renanravelli.batch.mapping.Registry;
 import br.com.renanravelli.batch.model.User;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.batch.item.ItemReader;
 
 import java.util.ArrayList;
@@ -16,10 +17,12 @@ import java.util.List;
  */
 public class UserRegistry implements Registry {
 
-    private List<Registry> users = new ArrayList<>();
+    private List<Registry> users;
+    private UserRegistryBuilder userRegistryBuilder;
 
-    private UserRegistry(List<Registry> users) {
+    private UserRegistry(List<Registry> users, UserRegistryBuilder userRegistryBuilder) {
         this.users = users;
+        this.userRegistryBuilder = userRegistryBuilder;
     }
 
     public static class UserRegistryBuilder {
@@ -33,33 +36,36 @@ public class UserRegistry implements Registry {
             return this;
         }
 
-        public UserRegistryBuilder body(User user) throws Exception {
-
-            registries.add(new UserBody
-                    .UserBodyBuilder()
-                    .name(user.getName())
-                    .lastname(user.getLastname())
-                    .birthday(user.getBirthday())
-                    .build()
-            );
+        public UserRegistryBuilder body(List<User> users) throws Exception {
+            users.forEach(user -> {
+                registries.add(new UserBody
+                        .UserBodyBuilder()
+                        .name(user.getName())
+                        .lastname(user.getLastname())
+                        .birthday(user.getBirthday())
+                        .build());
+            });
 
             // se o header nao estiver preenchido.
             if (registries.get(0) == null && !(registries.get(0) instanceof UserHeader)) {
                 registries.add(0, new UserHeader
                         .UserHeaderBuilder()
                         .dateGenerate(new Date())
-                        .registryAmount(registries.size())
-                        .build());
+                        .registryAmount(registries.size()).build());
             }
             return this;
         }
 
         public UserRegistry build() {
-            return new UserRegistry(registries);
+            return new UserRegistry(registries, this);
         }
     }
 
     public List<Registry> getUsers() {
         return users;
+    }
+
+    public UserRegistryBuilder getUserRegistryBuilder() {
+        return userRegistryBuilder;
     }
 }

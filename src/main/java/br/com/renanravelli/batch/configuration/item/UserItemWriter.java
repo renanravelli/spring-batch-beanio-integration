@@ -17,38 +17,38 @@ public class UserItemWriter implements ItemWriter<User> {
 
     @Value("${file.directory.out}")
     private String path;
+    private UserRegistry userRegistry;
 
     @Override
     public void write(List<? extends User> list) throws Exception {
+        userRegistry = new UserRegistry.UserRegistryBuilder()
+                .build();
 
-        UserRegistry.UserRegistryBuilder userRegistry = new UserRegistry
-                .UserRegistryBuilder();
-
-
-        list.forEach(o -> {
-            try {
-                userRegistry.body(o);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
-        UserRegistry userBuild = userRegistry.build();
-        userRegistry.header(new UserHeader
-                .UserHeaderBuilder()
-                .dateGenerate(new Date())
-                .registryAmount(
-                        userBuild.getUsers().size()
-                )
-                .build());
+        createBody((List<User>) list);
+        createHeader();
 
 
         ItemUtils.writer(
                 "userStream",
                 path,
                 "users.txt",
-                userBuild.getUsers(),
+                userRegistry.getUsers(),
                 UserHeader.class,
                 UserBody.class);
+    }
+
+    private void createBody(List<User> users) throws Exception {
+        this.userRegistry.getUserRegistryBuilder()
+                .body(users);
+    }
+
+    private void createHeader() {
+        userRegistry.getUserRegistryBuilder()
+                .header(new UserHeader
+                        .UserHeaderBuilder()
+                        .dateGenerate(new Date())
+                        .registryAmount(
+                                userRegistry.getUsers().size()
+                        ).build());
     }
 }
