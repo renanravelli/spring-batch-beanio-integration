@@ -1,14 +1,16 @@
 package br.com.renanravelli.batch.configuration.item;
 
+import br.com.cabal.sippe.writer.CSBeanWriter;
 import br.com.renanravelli.batch.mapping.user.UserBody;
 import br.com.renanravelli.batch.mapping.user.UserHeader;
 import br.com.renanravelli.batch.mapping.user.UserRegistry;
 import br.com.renanravelli.batch.model.User;
-import br.com.renanravelli.batch.util.ItemUtils;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Date;
 import java.util.List;
 
@@ -18,22 +20,29 @@ public class UserItemWriter implements ItemWriter<User> {
     @Value("${file.directory.out}")
     private String path;
     private UserRegistry userRegistry;
+    private CSBeanWriter csBeanWriter;
+
+    @PostConstruct
+    public void initFile() {
+        csBeanWriter = new CSBeanWriter
+                .CSBeanWriterBuilder()
+                .name("test.txt")
+                .path(path)
+                .record(UserHeader.class)
+                .record(UserBody.class)
+                .build();
+    }
 
     @Override
     public void write(List<? extends User> list) throws Exception {
-        userRegistry = new UserRegistry.UserRegistryBuilder()
+        userRegistry = new UserRegistry
+                .UserRegistryBuilder()
                 .build();
 
         createHeader();
         createBody((List<User>) list);
 
-        ItemUtils.writer(
-                "userStream",
-                path,
-                "users.txt",
-                userRegistry.getUsers(),
-                UserHeader.class,
-                UserBody.class);
+        csBeanWriter.escrever(userRegistry.getUsers());
     }
 
     private void createBody(List<User> users) throws Exception {
@@ -49,5 +58,10 @@ public class UserItemWriter implements ItemWriter<User> {
                         .registryAmount(
                                 userRegistry.getUsers().size()
                         ).build());
+    }
+
+    @PreDestroy
+    public void destroy() {
+        csBeanWriter.fechar();
     }
 }
