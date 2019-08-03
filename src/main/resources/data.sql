@@ -1,8 +1,4 @@
 INSERT INTO USER (id, name, lastname, birthday)
-VALUES (1, 'Renan Ravelli', 'Alves de Araujo', '1996-11-08');
-INSERT INTO USER (id, name, lastname, birthday)
-VALUES (2, 'Marcela Souza', 'Silva', '1996-04-28');
-INSERT INTO USER (id, name, lastname, birthday)
 VALUES (3, 'Usuário 01', 'Sobrenome 01', '2019-04-05');
 INSERT INTO USER (id, name, lastname, birthday)
 VALUES (4, 'Usuário 02', 'Sobrenome 02', '2019-04-05');
@@ -24,3 +20,7 @@ INSERT INTO USER (id, name, lastname, birthday)
 VALUES (12, 'Usuário 10', 'Sobrenome 10', '2019-04-05');
 INSERT INTO USER (id, name, lastname, birthday)
 VALUES (13, 'Usuário 11', 'Sobrenome 11', '2019-04-05');
+INSERT INTO USER (id, name, lastname, birthday)
+VALUES (13, 'Usuário 12', 'Sobrenome 12', '2019-04-05');
+INSERT INTO USER (id, name, lastname, birthday)
+VALUES (13, 'Usuário 13', 'Sobrenome 13', '2019-04-05');

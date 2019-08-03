@@ -1,6 +1,6 @@
-package br.com.renanravelli.batch.mapping.user;
+package br.com.renanravelli.batch.streams.mapping.user;
 
-import br.com.renanravelli.batch.mapping.Registry;
+import br.com.renanravelli.batch.streams.mapping.Registry;
 import org.beanio.annotation.Field;
 import org.beanio.annotation.Fields;
 import org.beanio.annotation.Record;
@@ -22,6 +22,9 @@ public class UserBody implements Registry {
     private String lastname;
     @Field(length = 8, name = "data de nascimento do usuario", format = "ddMMyyyy", required = true)
     private Date birthday;
+
+    public UserBody() {
+    }
 
     private UserBody(String name, String lastname, Date birthday) {
         this.name = name;
@@ -55,5 +58,17 @@ public class UserBody implements Registry {
         public UserBody build() {
             return new UserBody(name, lastname, birthday);
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public Date getBirthday() {
+        return birthday;
     }
 }

@@ -1,67 +1,52 @@
 package br.com.renanravelli.batch.configuration.item;
 
-import br.com.cabal.sippe.writer.CSBeanWriter;
-import br.com.renanravelli.batch.mapping.user.UserBody;
-import br.com.renanravelli.batch.mapping.user.UserHeader;
-import br.com.renanravelli.batch.mapping.user.UserRegistry;
 import br.com.renanravelli.batch.model.User;
+import br.com.renanravelli.batch.streams.configuration.FlatFileConfiguration;
+import br.com.renanravelli.batch.streams.enums.FlatFileOptionEnum;
+import br.com.renanravelli.batch.streams.enums.StreamNameEnum;
+import br.com.renanravelli.batch.streams.mapping.user.UserHeader;
+import br.com.renanravelli.batch.streams.mapping.user.UserRegistry;
+import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.util.Date;
 import java.util.List;
 
-@Component("userItemWriter")
-public class UserItemWriter implements ItemWriter<User> {
+@Component
+public class UserItemWriter extends StepExecutionListenerSupport implements ItemWriter<User> {
 
     @Value("${file.directory.out}")
     private String path;
     private UserRegistry userRegistry;
-    private CSBeanWriter csBeanWriter;
+    @Autowired
+    private FlatFileConfiguration configuration;
 
-    @PostConstruct
-    public void initFile() {
-        csBeanWriter = new CSBeanWriter
-                .CSBeanWriterBuilder()
-                .name("test.txt")
-                .path(path)
-                .record(UserHeader.class)
-                .record(UserBody.class)
-                .build();
+    @Override
+    public void beforeStep(StepExecution stepExecution) {
+        this.configuration.initialize(FlatFileOptionEnum.WRITER, StreamNameEnum.USER_CSV, path);
     }
 
     @Override
     public void write(List<? extends User> list) throws Exception {
+
         userRegistry = new UserRegistry
                 .UserRegistryBuilder()
-                .build();
-
-        createHeader();
-        createBody((List<User>) list);
-
-        csBeanWriter.escrever(userRegistry.getUsers());
-    }
-
-    private void createBody(List<User> users) throws Exception {
-        this.userRegistry.getUserRegistryBuilder()
-                .body(users);
-    }
-
-    private void createHeader() {
-        userRegistry.getUserRegistryBuilder()
                 .header(new UserHeader
                         .UserHeaderBuilder()
                         .dateGenerate(new Date())
                         .registryAmount(
-                                userRegistry.getUsers().size()
-                        ).build());
+                                list.size()
+                        ).build())
+                .body((List<User>) list)
+                .build();
+
+        this.configuration.getWriter().write(this.userRegistry.getUsers());
+
+        this.configuration.close();
     }
 
-    @PreDestroy
-    public void destroy() {
-        csBeanWriter.fechar();
-    }
 }

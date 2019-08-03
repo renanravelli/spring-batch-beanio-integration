@@ -1,6 +1,6 @@
-package br.com.renanravelli.batch.mapping.user;
+package br.com.renanravelli.batch.streams.mapping.user;
 
-import br.com.renanravelli.batch.mapping.Registry;
+import br.com.renanravelli.batch.streams.mapping.Registry;
 import org.beanio.annotation.Field;
 import org.beanio.annotation.Fields;
 import org.beanio.annotation.Record;
@@ -21,6 +21,9 @@ public class UserHeader implements Registry {
     private Date dateGenerate;
     @Field(length = 6, align = Align.RIGHT, padding = '0', type = Integer.class)
     private Integer registryAmount;
+
+    public UserHeader() {
+    }
 
     private UserHeader(Date dateGenerate, Integer registryAmount) {
         this.dateGenerate = dateGenerate;
@@ -47,5 +50,13 @@ public class UserHeader implements Registry {
         public UserHeader build() {
             return new UserHeader(dateGenerate, registryAmount);
         }
+    }
+
+    public Date getDateGenerate() {
+        return dateGenerate;
+    }
+
+    public Integer getRegistryAmount() {
+        return registryAmount;
     }
 }

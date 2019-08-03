@@ -1,9 +1,7 @@
-package br.com.renanravelli.batch.mapping.user;
+package br.com.renanravelli.batch.streams.mapping.user;
 
-import br.com.renanravelli.batch.mapping.Registry;
+import br.com.renanravelli.batch.streams.mapping.Registry;
 import br.com.renanravelli.batch.model.User;
-import org.omg.CORBA.PUBLIC_MEMBER;
-import org.springframework.batch.item.ItemReader;
 
 import java.util.ArrayList;
 import java.util.Date;

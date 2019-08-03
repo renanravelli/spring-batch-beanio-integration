@@ -22,13 +22,15 @@ public class UserJob {
     private JobBuilderFactory jobBuilderFactory;
 
     /**
-     * Job responsavel por realizar a chamada dos steps.
+     * Job responsavel por realizar a chamada dos steps de escrita do arquivo.
      */
     @Bean
-    public Job sampleJob(@Qualifier("stepReaderUsers") Step stepReaderUsers) {
-        return this.jobBuilderFactory.get("sampleJob")
+    public Job sampleJob(@Qualifier("stepReaderUsers") Step stepReaderUsers,
+                         @Qualifier("stepReaderFileUsers") Step userStepReaderFile) {
+        return this.jobBuilderFactory.get("USER_JOB_CREATE")
                 .incrementer(new RunIdIncrementer())
                 .start(stepReaderUsers)
+                .next(userStepReaderFile)
                 .build();
     }
 

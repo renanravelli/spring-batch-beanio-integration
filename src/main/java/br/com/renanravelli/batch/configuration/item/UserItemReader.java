@@ -14,7 +14,7 @@ public class UserItemReader {
     @Autowired
     private EntityManager entityManager;
 
-    @Bean("reader")
+    @Bean("jpaUserItemReader")
     public JpaPagingItemReader read() {
         return new JpaPagingItemReaderBuilder<User>()
                 .name("UserItemReader")

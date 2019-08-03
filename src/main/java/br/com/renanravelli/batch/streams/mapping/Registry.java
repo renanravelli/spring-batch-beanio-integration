@@ -1,4 +1,4 @@
-package br.com.renanravelli.batch.mapping;
+package br.com.renanravelli.batch.streams.mapping;
 
 /**
  * @author renanravelli
