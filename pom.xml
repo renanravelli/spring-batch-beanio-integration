@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.renanravelli</groupId>
-    <artifactId>spring-batch-example</artifactId>
+    <artifactId>spring-batch-beanio-integration</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-batch-example</name>
+    <name>spring-batch-beanio-integration</name>
     <description>Implementacao spring batch com beanio</description>
 
     <properties>
