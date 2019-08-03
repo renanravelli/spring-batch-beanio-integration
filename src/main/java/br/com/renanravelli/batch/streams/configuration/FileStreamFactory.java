@@ -9,9 +9,9 @@ import org.beanio.builder.DelimitedParserBuilder;
 import org.beanio.builder.FixedLengthParserBuilder;
 import org.beanio.builder.StreamBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class FileStreamFactory {
 
 
