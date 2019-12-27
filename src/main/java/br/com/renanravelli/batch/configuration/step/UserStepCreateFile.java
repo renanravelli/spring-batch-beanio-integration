@@ -1,5 +1,7 @@
 package br.com.renanravelli.batch.configuration.step;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.listener.StepExecutionListenerSupport;
@@ -16,9 +18,10 @@ import org.springframework.context.annotation.Configuration;
  * @since 02/03/2019
  */
 @Configuration
+@RequiredArgsConstructor
 public class UserStepCreateFile extends StepExecutionListenerSupport {
 
-    @Autowired
+    @NonNull
     private StepBuilderFactory stepBuilderFactory;
     @Value("${file.directory.out}")
     private String path;

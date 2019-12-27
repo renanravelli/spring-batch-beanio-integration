@@ -1,9 +1,11 @@
 package br.com.renanravelli.batch.configuration.item;
 
 import br.com.renanravelli.batch.streams.configuration.FlatFileConfiguration;
-import br.com.renanravelli.batch.streams.enums.FlatFileOptionEnum;
-import br.com.renanravelli.batch.streams.enums.StreamNameEnum;
+import br.com.renanravelli.batch.streams.enums.FlatFileOption;
+import br.com.renanravelli.batch.streams.enums.StreamName;
 import br.com.renanravelli.batch.streams.mapping.Registry;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.batch.item.ItemWriter;
@@ -14,16 +16,17 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class UserItemWriterFile extends StepExecutionListenerSupport implements ItemWriter<Registry> {
 
-    @Autowired
+    @NonNull
     private FlatFileConfiguration<Registry> configuration;
     @Value("${file.directory.out}")
     private String path;
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
-        this.configuration.initialize(FlatFileOptionEnum.WRITER, StreamNameEnum.USER_DELIMITED, path);
+        this.configuration.initialize(FlatFileOption.WRITER, StreamName.USER_DELIMITED, path);
     }
 
     @Override

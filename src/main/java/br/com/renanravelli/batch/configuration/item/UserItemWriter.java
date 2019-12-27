@@ -2,10 +2,12 @@ package br.com.renanravelli.batch.configuration.item;
 
 import br.com.renanravelli.batch.model.User;
 import br.com.renanravelli.batch.streams.configuration.FlatFileConfiguration;
-import br.com.renanravelli.batch.streams.enums.FlatFileOptionEnum;
-import br.com.renanravelli.batch.streams.enums.StreamNameEnum;
+import br.com.renanravelli.batch.streams.enums.FlatFileOption;
+import br.com.renanravelli.batch.streams.enums.StreamName;
 import br.com.renanravelli.batch.streams.mapping.user.UserHeader;
 import br.com.renanravelli.batch.streams.mapping.user.UserRegistry;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.batch.item.ItemWriter;
@@ -17,17 +19,18 @@ import java.util.Date;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class UserItemWriter extends StepExecutionListenerSupport implements ItemWriter<User> {
 
+    @NonNull
+    private FlatFileConfiguration configuration;
     @Value("${file.directory.out}")
     private String path;
     private UserRegistry userRegistry;
-    @Autowired
-    private FlatFileConfiguration configuration;
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
-        this.configuration.initialize(FlatFileOptionEnum.WRITER, StreamNameEnum.USER_CSV, path);
+        this.configuration.initialize(FlatFileOption.WRITER, StreamName.USER_CSV, path);
     }
 
     @Override

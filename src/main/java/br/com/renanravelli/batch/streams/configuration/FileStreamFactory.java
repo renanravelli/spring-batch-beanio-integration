@@ -1,6 +1,6 @@
 package br.com.renanravelli.batch.streams.configuration;
 
-import br.com.renanravelli.batch.streams.enums.StreamNameEnum;
+import br.com.renanravelli.batch.streams.enums.StreamName;
 import br.com.renanravelli.batch.streams.mapping.user.UserBody;
 import br.com.renanravelli.batch.streams.mapping.user.UserHeader;
 import org.beanio.StreamFactory;
@@ -21,9 +21,9 @@ public class FileStreamFactory {
 
 
         // Definindo os streams factorys para o mapeamento usuario.
-        StreamBuilder builderFixedLength = new StreamBuilder(StreamNameEnum.USER_FIXED_LENGTH.getStream());
-        StreamBuilder builderDelimited = new StreamBuilder(StreamNameEnum.USER_DELIMITED.getStream());
-        StreamBuilder builderCsv = new StreamBuilder(StreamNameEnum.USER_CSV.getStream());
+        StreamBuilder builderFixedLength = new StreamBuilder(StreamName.USER_FIXED_LENGTH.getStream());
+        StreamBuilder builderDelimited = new StreamBuilder(StreamName.USER_DELIMITED.getStream());
+        StreamBuilder builderCsv = new StreamBuilder(StreamName.USER_CSV.getStream());
 
 
         //Formatos possiveis

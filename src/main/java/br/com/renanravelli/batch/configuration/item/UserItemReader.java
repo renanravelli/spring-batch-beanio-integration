@@ -1,17 +1,18 @@
 package br.com.renanravelli.batch.configuration.item;
 
 import br.com.renanravelli.batch.model.User;
+import lombok.AllArgsConstructor;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
 
 @Configuration
+@AllArgsConstructor
 public class UserItemReader {
-    @Autowired
+
     private EntityManager entityManager;
 
     @Bean("jpaUserItemReader")

@@ -2,7 +2,7 @@ package br.com.renanravelli.batch.service;
 
 import br.com.renanravelli.batch.model.User;
 import br.com.renanravelli.batch.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.List;
  * @since 02/03/2019
  */
 @Service
+@AllArgsConstructor
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
     /**

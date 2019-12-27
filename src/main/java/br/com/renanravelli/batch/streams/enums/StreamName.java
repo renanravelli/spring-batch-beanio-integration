@@ -1,6 +1,6 @@
 package br.com.renanravelli.batch.streams.enums;
 
-public enum StreamNameEnum {
+public enum StreamName {
     USER_FIXED_LENGTH("user-with-fixed-length", ".txt"),
     USER_DELIMITED("user-with-delimited", ".txt"),
     USER_CSV("user-with-csv", ".csv");
@@ -8,7 +8,7 @@ public enum StreamNameEnum {
     private String stream;
     private String extesion;
 
-    StreamNameEnum(String stream, String extesion) {
+    StreamName(String stream, String extesion) {
         this.stream = stream;
         this.extesion = extesion;
     }
