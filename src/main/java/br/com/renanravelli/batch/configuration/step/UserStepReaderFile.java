@@ -26,24 +26,6 @@ public class UserStepReaderFile {
 
     private final StepBuilderFactory stepBuilderFactory;
 
-    @Bean
-    @StepScope
-    @SneakyThrows
-    public ItemReader<Registry> userItemReaderFile(@Qualifier("streamFactory") StreamFactory streamFactory,
-                                                   @Value("${file.directory.out}") String path) {
-        BeanIOFlatFileItemReader<Registry> reader = new BeanIOFlatFileItemReader<>();
-        reader.setResource(new FileSystemResource(
-                path.concat(File.separator)
-                        .concat(StreamName.USER_CSV.getStream()
-                                .concat(StreamName.USER_CSV.getExtesion()))));
-        reader.setStreamName(StreamName.USER_CSV.getStream());
-        reader.setStreamFactory(streamFactory);
-        reader.open(new ExecutionContext());
-        reader.afterPropertiesSet();
-
-        return reader;
-    }
-
     /**
      * Step responsavel por realizar a execucao dos itens reader e writer.
      */
