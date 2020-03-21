@@ -2,6 +2,7 @@ package br.com.renanravelli.batch.configuration.job;
 
 import lombok.AllArgsConstructor;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -28,9 +29,11 @@ public class UserJob {
     @Bean
     public Job sampleJob(@Qualifier("stepReaderUsers") Step stepReaderUsers,
                          @Qualifier("stepReaderFileUsers") Step userStepReaderFile,
-                         @Qualifier("stepWriterUsersBD") Step stepWriterUsersBD) {
+                         @Qualifier("stepWriterUsersBD") Step stepWriterUsersBD,
+                         JobExecutionListener listener) {
         return this.jobBuilderFactory.get("USER_JOB_CREATE")
                 .incrementer(new RunIdIncrementer())
+                .listener(listener)
                 .start(stepReaderUsers)
                 .next(userStepReaderFile)
                 .next(stepWriterUsersBD)

@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @RequiredArgsConstructor
-public class UserStepWriteBD extends StepExecutionListenerSupport {
+public class UserStepWriterBD extends StepExecutionListenerSupport {
 
     @NonNull
     private StepBuilderFactory stepBuilderFactory;
