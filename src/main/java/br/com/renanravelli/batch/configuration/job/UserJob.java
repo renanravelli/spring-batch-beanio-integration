@@ -27,11 +27,13 @@ public class UserJob {
      */
     @Bean
     public Job sampleJob(@Qualifier("stepReaderUsers") Step stepReaderUsers,
-                         @Qualifier("stepReaderFileUsers") Step userStepReaderFile) {
+                         @Qualifier("stepReaderFileUsers") Step userStepReaderFile,
+                         @Qualifier("stepWriterUsersBD") Step stepWriterUsersBD) {
         return this.jobBuilderFactory.get("USER_JOB_CREATE")
                 .incrementer(new RunIdIncrementer())
                 .start(stepReaderUsers)
                 .next(userStepReaderFile)
+                .next(stepWriterUsersBD)
                 .build();
     }
 
