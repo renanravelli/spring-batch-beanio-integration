@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * @author joao4018
+ * @since 20/03/2020
+ */
+
 @Component
 @RequiredArgsConstructor
 public class UserItemWriterBD {

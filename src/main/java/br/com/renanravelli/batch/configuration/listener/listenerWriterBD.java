@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
+/**
+ * @author joao4018
+ * @since 20/03/2020
+ */
 @Configuration
 public class listenerWriterBD {
 
@@ -37,7 +40,7 @@ public class listenerWriterBD {
                 if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
                     log.info("!!! JOB FINISHED! Time to verify the results");
                     userRepository.findAll().
-                            forEach(person -> log.info("Found <" + person + "> in the database."));
+                            forEach(user -> log.info("Found <" + user + "> in the database."));
                 }
             }
         };
