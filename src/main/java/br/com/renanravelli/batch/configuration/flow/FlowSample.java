@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class FlowSample {
 
-    @Bean("flow1")
+    @Bean("flow")
     public Flow flow1(@Qualifier("stepReaderUsers") Step stepReaderUsers,
                       @Qualifier("stepReaderFileUsers") Step userStepReaderFile,
                       @Qualifier("stepWriterUsersDB") Step stepWriterUsersBD) {
-        return new FlowBuilder<SimpleFlow>("flow1")
+        return new FlowBuilder<SimpleFlow>("flow")
                 .start(stepReaderUsers)
                 .next(userStepReaderFile)
                 .next(stepWriterUsersBD)
