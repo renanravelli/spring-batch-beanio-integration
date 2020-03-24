@@ -1,4 +1,4 @@
-package br.com.renanravelli.batch.configuration.item;
+package br.com.renanravelli.batch.configuration.item.Reader;
 
 import br.com.renanravelli.batch.model.User;
 import lombok.AllArgsConstructor;

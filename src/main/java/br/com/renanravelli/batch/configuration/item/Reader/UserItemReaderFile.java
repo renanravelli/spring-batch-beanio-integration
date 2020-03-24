@@ -1,4 +1,4 @@
-package br.com.renanravelli.batch.configuration.item;
+package br.com.renanravelli.batch.configuration.item.Reader;
 
 import br.com.renanravelli.batch.streams.configuration.FlatFileConfiguration;
 import br.com.renanravelli.batch.streams.enums.FlatFileOption;

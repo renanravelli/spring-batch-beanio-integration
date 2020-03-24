@@ -1,4 +1,4 @@
-package br.com.renanravelli.batch.configuration.item;
+package br.com.renanravelli.batch.configuration.item.Writer;
 
 import br.com.renanravelli.batch.model.User;
 import br.com.renanravelli.batch.streams.configuration.FlatFileConfiguration;

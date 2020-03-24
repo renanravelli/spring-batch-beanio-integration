@@ -1,5 +1,6 @@
-package br.com.renanravelli.batch.configuration.item;
+package br.com.renanravelli.batch.configuration.item.Writer;
 
+import br.com.renanravelli.batch.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class UserItemWriterBD {
     EntityManagerFactory emf;
 
     @Bean("jpaUserItemWriter")
-    public JpaItemWriter writer() {
-        JpaItemWriter writer = new JpaItemWriter();
+    public JpaItemWriter<User> writer() {
+        JpaItemWriter<User> writer = new JpaItemWriter<>();
         writer.setEntityManagerFactory(emf);
         return writer;
     }
