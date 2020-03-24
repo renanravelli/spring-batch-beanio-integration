@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @RequiredArgsConstructor
-public class UserStepWriterBD extends StepExecutionListenerSupport {
+public class UserStepWriterDB extends StepExecutionListenerSupport {
 
     @NonNull
     private StepBuilderFactory stepBuilderFactory;
@@ -25,8 +25,8 @@ public class UserStepWriterBD extends StepExecutionListenerSupport {
     /**
      * Step responsavel por realizar a execucao dos itens reader e writer.
      */
-    @Bean("stepWriterUsersBD")
-    public Step stepReaderUsers(@Qualifier("jpaUserItemReader") ItemReader reader, @Qualifier("jpaUserItemWriter") ItemWriter writer) {
+    @Bean("stepWriterUsersDB")
+    public Step stepWriteUsersDB(@Qualifier("jpaUserItemReader") ItemReader reader, @Qualifier("jpaUserItemWriter") ItemWriter writer) {
         return this.stepBuilderFactory.get("STEP_WRITER_USERS_IN_DATABASE")
                 .chunk(1000)
                 .reader(reader)

@@ -30,7 +30,7 @@ public class UserJob {
     @Bean
     public Job sampleJob(@Qualifier("stepReaderUsers") Step stepReaderUsers,
                          @Qualifier("stepReaderFileUsers") Step userStepReaderFile,
-                         @Qualifier("stepWriterUsersBD") Step stepWriterUsersBD,
+                         @Qualifier("stepWriterUsersDB") Step stepWriterUsersBD,
                          JobExecutionListener listener) {
         return this.jobBuilderFactory.get("USER_JOB_CREATE")
                 .incrementer(new RunIdIncrementer())
