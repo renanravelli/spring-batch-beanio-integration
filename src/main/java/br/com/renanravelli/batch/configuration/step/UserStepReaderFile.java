@@ -22,6 +22,11 @@ import org.springframework.core.io.FileSystemResource;
 import java.io.File;
 import java.util.List;
 
+/**
+ * @author renanravelli
+ * @Maintainer joao4018
+ * @since 20/03/2020
+ */
 @Configuration
 @RequiredArgsConstructor
 public class UserStepReaderFile {
