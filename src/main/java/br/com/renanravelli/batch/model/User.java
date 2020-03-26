@@ -13,7 +13,7 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "name")
     private String name;
@@ -21,6 +21,15 @@ public class User {
     private String lastname;
     @Column(name = "birthday")
     private Date birthday;
+
+    public User() {
+    }
+
+    public User(String name, String lastname, Date birthday) {
+        this.name = name;
+        this.lastname = lastname;
+        this.birthday = birthday;
+    }
 
     public String getName() {
         return name;
