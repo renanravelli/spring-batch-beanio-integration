@@ -3,7 +3,6 @@ package br.com.renanravelli.batch.configuration.item.Writer;
 import br.com.renanravelli.batch.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.database.JpaItemWriter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +17,8 @@ import javax.persistence.EntityManagerFactory;
 @RequiredArgsConstructor
 public class UserItemWriterBD {
 
-    @Autowired
-    EntityManagerFactory emf;
+
+    private final EntityManagerFactory emf;
 
     @Bean("jpaUserItemWriter")
     public JpaItemWriter<User> writer() {

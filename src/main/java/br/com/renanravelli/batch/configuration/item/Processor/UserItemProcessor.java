@@ -1,12 +1,10 @@
 package br.com.renanravelli.batch.configuration.item.Processor;
 
 import br.com.renanravelli.batch.model.User;
-import lombok.AllArgsConstructor;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@AllArgsConstructor
 public class UserItemProcessor implements ItemProcessor<User, User> {
 
     @Override
