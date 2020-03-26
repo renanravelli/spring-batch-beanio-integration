@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 @StepScope
+@RequiredArgsConstructor
 public class UserItemReaderFile extends StepExecutionListenerSupport implements ItemReader<Registry> {
 
     @NonNull

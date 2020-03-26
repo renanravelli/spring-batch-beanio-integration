@@ -12,7 +12,7 @@ public class UserItemProcessor implements ItemProcessor<User, User> {
         final String firstName = user.getName().toUpperCase();
         final String lastName = user.getLastname().toUpperCase();
 
-        final User transformed = new User(firstName, lastName, user.getBirthday());
+        final User transformed = new User(null, firstName, lastName, user.getBirthday());
         return transformed;
     }
 }
