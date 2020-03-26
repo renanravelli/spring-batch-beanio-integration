@@ -1,22 +1,21 @@
 package br.com.renanravelli.batch.streams.configuration;
 
 import br.com.renanravelli.batch.streams.enums.StreamName;
-import br.com.renanravelli.batch.streams.mapping.user.UserBody;
-import br.com.renanravelli.batch.streams.mapping.user.UserHeader;
+import br.com.renanravelli.batch.streams.mapping.user.UserRegistry;
 import org.beanio.StreamFactory;
 import org.beanio.builder.CsvParserBuilder;
 import org.beanio.builder.DelimitedParserBuilder;
 import org.beanio.builder.FixedLengthParserBuilder;
 import org.beanio.builder.StreamBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class FileStreamFactory {
 
 
     @Bean
-    public StreamFactory streamFactory() {
+    public StreamFactory streamFactoryFile() {
         StreamFactory factory = StreamFactory.newInstance();
 
 
@@ -29,20 +28,17 @@ public class FileStreamFactory {
         //Formatos possiveis
         builderFixedLength.format("fixedlength")
                 .parser(new FixedLengthParserBuilder())
-                .addRecord(UserHeader.class)
-                .addRecord(UserBody.class)
+                .addRecord(UserRegistry.class)
                 .build();
 
         builderDelimited.format("delimited")
                 .parser(new DelimitedParserBuilder('|'))
-                .addRecord(UserHeader.class)
-                .addRecord(UserBody.class)
+                .addRecord(UserRegistry.class)
                 .build();
 
         builderCsv.format("csv")
                 .parser(new CsvParserBuilder())
-                .addRecord(UserHeader.class)
-                .addRecord(UserBody.class)
+                .addRecord(UserRegistry.class)
                 .build();
 
 

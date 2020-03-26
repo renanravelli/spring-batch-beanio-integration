@@ -4,7 +4,6 @@ import br.com.renanravelli.batch.streams.enums.FlatFileOption;
 import br.com.renanravelli.batch.streams.enums.StreamName;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.beanio.StreamFactory;
 import org.beanio.spring.BeanIOFlatFileItemReader;
 import org.beanio.spring.BeanIOFlatFileItemWriter;
@@ -16,7 +15,6 @@ import java.io.File;
 import java.util.Objects;
 
 @Component
-@RequiredArgsConstructor
 public class FlatFileConfiguration<T> {
 
     @Getter

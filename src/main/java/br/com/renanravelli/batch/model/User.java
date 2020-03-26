@@ -1,6 +1,12 @@
 package br.com.renanravelli.batch.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -8,7 +14,11 @@ import java.util.Date;
  * @since 02/03/2019
  * Classe responsavel pelo mapeamento da entidade do banco de dados.
  */
+@Getter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "USER")
 public class User {
 
@@ -20,39 +30,5 @@ public class User {
     @Column(name = "lastname")
     private String lastname;
     @Column(name = "birthday")
-    private Date birthday;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", birthday=" + birthday +
-                '}';
-    }
+    private LocalDate birthday;
 }
